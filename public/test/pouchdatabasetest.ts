@@ -57,7 +57,7 @@ class PouchDatabaseTest {
 				assert.ok(r.ok == true, "insert/update success");
 				return this.pdb.read_doc(docid);
 			}).then((xdoc) => {
-				assert.ok((xdoc !== undefined) && (xdoc !== null));
+				assert.ok((xdoc !== undefined) && (xdoc !== null),"read_doc returns ok");
 				assert.ok(doc._id !== undefined);
 				assert.ok(doc._id == docid);
 				return this.pdb.remove_doc(xdoc);
@@ -87,25 +87,25 @@ class PouchDatabaseTest {
 				docs.push({ _id: id, ival: i });
 			}// i
 			this.pdb.bulk_maintains(docs).then((r) => {
-				assert.ok((r !== undefined) && (r !== null));
+				assert.ok((r !== undefined) && (r !== null),"bulk_maintains returnd ok");
 				return this.pdb.docs_ids_range(startkey, endkey);
 			}).then((xids) => {
-				assert.ok((xids !== undefined) && (xids !== null));
+				assert.ok((xids !== undefined) && (xids !== null),"docs_ids_range returns ok");
 				assert.ok(xids.length >= nb);
 				return this.pdb.docs_read_range(startkey, endkey, 0, nb);
 			}).then((xdocs) => {
-				assert.ok((xdocs !== undefined) && (xdocs !== null));
+				assert.ok((xdocs !== undefined) && (xdocs !== null),"docs_read_range returns ok");
 				assert.ok(xdocs.length >= nb);
 				return this.pdb.docs_array(ids);
 			}).then((ydocs) => {
-				assert.ok((ydocs !== undefined) && (ydocs !== null));
+				assert.ok((ydocs !== undefined) && (ydocs !== null),"docs_array returns ok");
 				assert.ok(ydocs.length >= nb);
 				return this.pdb.remove_all_items(startkey, endkey);
 			}).then((xx) => {
-				assert.ok((xx !== undefined) && (xx !== null));
+				assert.ok((xx !== undefined) && (xx !== null),"remove_all_items returns ok");
 				return this.pdb.docs_array(ids);
 			}).then((zdocs) => {
-				assert.ok((zdocs !== undefined) && (zdocs !== null));
+				assert.ok((zdocs !== undefined) && (zdocs !== null),"check remove_all_items_ok");
 				assert.ok(zdocs.length < 1);
 				done();
 			}).catch((err) => {
@@ -131,7 +131,10 @@ class PouchDatabaseTest {
 				let fields: string[] = ["ival", "sval"];
 				return this.pdb.create_indexes(fields);
 			}).then((bRet) => {
-				assert.ok(bRet == true);
+				assert.ok(bRet == true,"create_indexes ok");
+				return this.pdb.find_docs({ival:1,sval:"s1"});
+			}).then((xx)=>{
+				assert.ok((xx !== undefined) && (xx !== null) && (xx.length> 0),"find_docs ok");
 				done();
 			}).catch((err) => {
 				assert.ok(false, "Exception occured...");
