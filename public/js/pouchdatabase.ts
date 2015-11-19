@@ -13,13 +13,10 @@ export class PouchDatabase implements IDocPersist {
 	private _db: IPouchDB;
 	private _url: string;
 	//
-	constructor() {
-		this._url = DATABASE_NAME;
-		this._db = null;
-	}
+	constructor() { }
 	//
 	public get name(): string {
-		return (this._url !== undefined) ? this._url : null;
+		return ((this._url !== undefined) && (this._url !== null)) ? this._url : DATABASE_NAME;
 	}
 	public set name(s: string) {
 		let ss = ((s !== undefined) && (s !== null)) ? s.trim() : null;
@@ -36,16 +33,15 @@ export class PouchDatabase implements IDocPersist {
 		if (this.name === null) {
 			Promise.reject(new Error('Null Database name'));
 		}
-		let self = this;
 		return new Promise((resolve, reject) => {
 			try {
-				let xx = new PouchDB(self._url, { auto_compaction: true }, (err: PouchError, xdb: any) => {
+				let xx = new PouchDB(this.name, { auto_compaction: true }, (err: PouchError, xdb: any) => {
 					if ((err !== undefined) && (err !== null)) {
 						reject(new Error(err.reason));
 					} else {
-						self._db = ((xdb !== undefined) && (xdb !== null)) ? xdb : null;
-						if (self._db !== null) {
-							resolve(self._db);
+						this._db = ((xdb !== undefined) && (xdb !== null)) ? xdb : null;
+						if (this._db !== null) {
+							resolve(this._db);
 						} else {
 							reject(new Error('Null Database handle'));
 						}
@@ -169,7 +165,7 @@ export class PouchDatabase implements IDocPersist {
 		});
 	}//bulk_maintains
 	//
-	public docs_ids_range(startKey: string, endKey: string): Promise<string[]> {
+	public docs_ids_range(startKey: string, endKey: string, skip?: number, limit?: number): Promise<string[]> {
 		let oRet: string[] = [];
 		if ((startKey === undefined) || (startKey === null) ||
 			(endKey === undefined) || (endKey === null)) {
@@ -178,13 +174,19 @@ export class PouchDatabase implements IDocPersist {
 		let options: PouchGetOptions = {
 			startkey: startKey, endkey: endKey
 		};
+		if ((skip !== undefined) && (skip !== null) && (skip > 0)) {
+			options.skip = skip;
+		}
+		if ((limit !== undefined) && (limit !== null) && (limit > 0)) {
+			options.limit = limit;
+		}
 		return this.db.then((xdb) => {
 			return xdb.allDocs(options).then((rr) => {
 				if ((rr !== undefined) && (rr !== null) && (rr.rows !== undefined) &&
 					(rr.rows !== null)) {
 					for (let r of rr.rows) {
 						if (r.id !== undefined) {
-							if ((r._deleted !== undefined) && (r.deleted !== undefined)) {
+							if ((r.deleted !== undefined) && (r.deleted !== undefined)) {
 								continue;
 							}
 							let id = r.id;
@@ -217,7 +219,7 @@ export class PouchDatabase implements IDocPersist {
 					(rr.rows !== null)) {
 					for (let r of rr.rows) {
 						if ((r.id !== undefined) && (r.doc !== undefined) && (r.doc !== null)) {
-							if ((r._deleted !== undefined) && (r.deleted !== undefined)) {
+							if ((r.deleted !== undefined) && (r.deleted !== undefined)) {
 								continue;
 							}
 							let doc = r.doc;

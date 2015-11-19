@@ -1,7 +1,7 @@
 // maintest.ts
 /// <reference path='../../typings/qunit/qunit.d.ts' />
 //
-//import {main as PouchBase} from './data/pouchdatabasetest';
+import {main as PouchBase} from './pouchdatabasetest';
 //import {main as dep} from './data/departementtest';
 //
 class MainTest {
@@ -16,7 +16,7 @@ class MainTest {
 	public run(): void {
 		this.test_dummy();
 		//
-		//PouchBase.run();
+		PouchBase.run();
 		//dep.run();
 	}// run
 }// class DummyTest

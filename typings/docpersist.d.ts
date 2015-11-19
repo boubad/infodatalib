@@ -9,7 +9,7 @@ declare module 'infodata' {
         update_doc: (doc: any) => Promise<any>;
         remove_doc: (doc: any) => Promise<any>;
         bulk_maintains: (docs: any[]) => Promise<any>;
-        docs_ids_range: (startkey: string, endkey: string) => Promise<string[]>;
+        docs_ids_range: (startkey: string, endkey: string,skip?: number, limit?: number) => Promise<string[]>;
         docs_read_range: (startkey: string, endkey: string, skip?: number, limit?: number) => Promise<any[]>;
         docs_array: (ids: string[]) => Promise<any[]>;
         remove_all_items: (startKey: string, endKey: string) => Promise<any>;
