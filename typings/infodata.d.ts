@@ -1,5 +1,4 @@
 //geninfo.d.ts
-/// <reference path='./es6.d.ts' />
 //
 declare module 'infodata' {
    
