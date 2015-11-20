@@ -2,7 +2,6 @@
 //
 import {IEtudiantAffectation} from 'infodata';
 import {Affectation} from './affectation';
-import {Person} from './person';
 import {ETUDAFFECTATION_TYPE, ETUDAFFECTATION_PREFIX} from './infoconstants';
 //
 export class EtudiantAffectation extends Affectation implements IEtudiantAffectation {

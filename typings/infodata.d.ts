@@ -187,11 +187,10 @@ declare module 'infodata' {
         matiereName?: string;
         groupeName?: string;
         eventDate: Date;
-        dateString: string;
         coefficient: number;
         semestreName?: string;
         anneeid: string;
-        anneeSigle: string;
+        anneeName: string;
         matiereCoefficient: number;
         uniteid: string;
         uniteCoefficient: number;
@@ -201,7 +200,6 @@ declare module 'infodata' {
     }
     export interface IGroupeEvent extends IInfoEvent {
         profaffectationid: string;
-		enseignantid: string;
         name: string;
         location: string;
         eventDate: Date;

@@ -1,7 +1,6 @@
 //personitem.ts
-import {IPersonItem} from 'infodata';
+import {IPersonItem,IPerson} from 'infodata';
 import {BaseItem} from './baseitem';
-import {Person} from './person';
 //
 export class PersonItem extends BaseItem implements IPersonItem {
 	//
@@ -109,7 +108,7 @@ export class PersonItem extends BaseItem implements IPersonItem {
         }
     } // sort_func
     //
-    public check_person(oPers: Person): boolean {
+    public check_person(oPers: IPerson): boolean {
 		this.check_id();
         if ((oPers === undefined) || (oPers === null)) {
             return false;

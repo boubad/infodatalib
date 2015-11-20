@@ -1,7 +1,6 @@
 //enseignantaffectation.ts
-import {IEnseignantAffectation} from 'infodata';
+import {IEnseignantAffectation, IPerson} from 'infodata';
 import {Affectation} from './affectation';
-import {Person} from './person';
 import {PROFAFFECTATION_TYPE, PROFAFFECTATION_PREFIX} from './infoconstants';
 //
 export class EnseignantAffectation extends Affectation implements IEnseignantAffectation {
@@ -111,7 +110,7 @@ export class EnseignantAffectation extends Affectation implements IEnseignantAff
 		}
         return (s1 + s2 + s3 + s4);
     }
-	public check_person(oPers: Person): boolean {
+	public check_person(oPers: IPerson): boolean {
 		if ((oPers === undefined) || (oPers === null)) {
             return false;
         }

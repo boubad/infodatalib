@@ -1,7 +1,6 @@
 //aaffectation.ts
-import {IAffectation} from 'infodata';
+import {IAffectation,IPerson} from 'infodata';
 import {PersonItem} from './personitem';
-import {Person} from './person';
 //
 export class Affectation extends PersonItem implements IAffectation {
 	private _anneeid: string;
@@ -172,7 +171,7 @@ export class Affectation extends PersonItem implements IAffectation {
         }
         return (t1 <= t2);
     }
-	public check_person(oPers: Person): boolean {
+	public check_person(oPers:IPerson): boolean {
 		if ((oPers === undefined) || (oPers === null)) {
             return false;
         }
