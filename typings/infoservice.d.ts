@@ -24,7 +24,4 @@ declare module 'infodata' {
         clear: () => void;
         changed: (evt: any,bUrl?:boolean) => any;
     }// interface IFileDesc
-	export interface IInfoRouter {
-		navigate_to: (xroute: string, opts?: any) => any;
-	}
 }// module infodaya
