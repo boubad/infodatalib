@@ -9,7 +9,7 @@ declare module 'infodata' {
     } // interface IInfoElement
     //
     export interface IElementDesc extends IInfoElement {
-		display?:string;
+		display?: string;
 		text: string;
 		selected: boolean;
         avatarid?: string;
@@ -46,7 +46,6 @@ declare module 'infodata' {
         create_id: () => string;
         check_id: () => void;
 		to_map: (oMap: any) => void;
-        from_map: (oMap?: any) => void;
         //
         attachments?: IAttachedDoc[];
     }// interface IBaseItem
@@ -60,7 +59,6 @@ declare module 'infodata' {
     }
     export interface IDepartementSigleNamedItem extends ISigleNamedItem {
         departementid: string;
-		departementName?: string;
     }
     export interface IUnite extends IDepartementSigleNamedItem {
         order: number;
@@ -83,8 +81,6 @@ declare module 'infodata' {
         order?: number;
         ecs?: number;
         coefficient?: number;
-		departementName?: string;
-		uniteName?: string;
     }
     export interface IIntervalledSigleItem extends ISigleNamedItem {
         startDate: Date;
@@ -95,10 +91,6 @@ declare module 'infodata' {
     }
     export interface ISemestre extends IIntervalledSigleItem {
         anneeid: string;
-		departementName?: string;
-		anneeName?: string;
-		anneeMinDate?: Date;
-		anneeMaxDate?: Date;
     }
     export interface IPerson extends IBaseItem {
         username: string;
@@ -125,6 +117,7 @@ declare module 'infodata' {
         dossier?: string;
         sexe?: string;
         birthDate?: Date;
+		birthYear?:number;
         ville?: string;
         etablissement?: string;
         serieBac?: string;
@@ -281,7 +274,7 @@ declare module 'infodata' {
         sumdata?: number;
     }// interface IDisplayEtudiant
     //
-     export interface ITransformArray {
+	export interface ITransformArray {
 		read_file: (file: File) => Promise<any[]>;
         transform_map: (oMap: any) => IBaseItem;
         transform_file: (file: File, stype: string) => Promise<any>;
