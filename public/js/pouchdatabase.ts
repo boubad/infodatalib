@@ -376,7 +376,7 @@ export class PouchDatabase implements IDocPersist {
 			return oRet;
 		});
 	}// create_indexes
-	public create_indexes(fields: string[]): Promise<boolean> {
+	public create_multi_index(fields: string[]): Promise<boolean> {
 		if ((fields === undefined) || (fields === null)) {
 			Promise.reject(new Error('Invalid argument(s)'));
 		}
@@ -402,7 +402,7 @@ export class PouchDatabase implements IDocPersist {
 			return bRet;
 		});
 	}// create_indexes
-	public create_all_indexes(fields: string[]): Promise<boolean[]> {
+	public create_indexes(fields: string[]): Promise<boolean[]> {
 		let oRet: boolean[] = [];
 		if ((fields === undefined) || (fields === null)) {
 			return Promise.resolve(oRet);
@@ -422,12 +422,12 @@ export class PouchDatabase implements IDocPersist {
 		}
 		return Promise.all(oAr);
 	}//create_all_indexes
-	public find_docs(temp: any, fields?: string[], skip?: number, limit?: number): Promise<any[]> {
+	public query_docs(sel: any, skip?: number, limit?: number, fields?: string[]): Promise<any[]> {
 		let oRet: any[] = [];
-		if ((temp === undefined) || (temp == null)) {
+		if ((sel === undefined) || (sel == null)) {
 			return Promise.resolve(oRet);
 		}
-		let options: PouchFindOptions = { selector: temp };
+		let options: PouchFindOptions = { selector: sel };
 		if ((fields !== undefined) && (fields !== null) && (fields.length > 0)) {
 			options.fields = fields;
 		}

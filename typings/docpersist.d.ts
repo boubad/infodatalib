@@ -3,6 +3,7 @@
 declare module 'infodata' {
 	export interface IDocPersist {
         name: string;
+		//
         exists_doc: (docid: string) => Promise<string>;
         read_doc: (docid: string, bAttachments?: boolean, bMeta?: Boolean) => Promise<any>;
         insert_doc: (doc: any) => Promise<any>;
@@ -13,7 +14,9 @@ declare module 'infodata' {
         docs_read_range: (startkey: string, endkey: string, skip?: number, limit?: number) => Promise<any[]>;
         docs_array: (ids: string[]) => Promise<any[]>;
         remove_all_items: (startKey: string, endKey: string) => Promise<any>;
+		//
         isOnline: () => Promise<boolean>;
+		//
         find_attachment: (docid: string, attachmentId: string) => Promise<Blob>;
         maintains_attachment: (docid: string, attachmentId: string,
             attachmentData: Blob, attachmentType: string) => Promise<any>;
@@ -22,9 +25,9 @@ declare module 'infodata' {
         replicate: (from: string, to: string, ids?: string[]) => Promise<boolean>;
         //
         create_one_index: (field: string) => Promise<boolean>;
-        create_indexes: (fields: string[]) => Promise<boolean>;
-        create_all_indexes: (fields: string[]) => Promise<boolean[]>;
-        find_docs: (temp: any, fields?: string[], skip?: number, limit?: number) => Promise<any[]>;
+        create_multi_index: (fields: string[]) => Promise<boolean>;
+        create_indexes: (fields: string[]) => Promise<boolean[]>;
+        query_docs: (selector: any,  skip?: number, limit?: number,fields?: string[]) => Promise<any[]>;
     }// interface IIDocPersist
     //
 }// module infodata
