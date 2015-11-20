@@ -281,5 +281,10 @@ declare module 'infodata' {
         sumdata?: number;
     }// interface IDisplayEtudiant
     //
-    
+     export interface ITransformArray {
+		read_file: (file: File) => Promise<any[]>;
+        transform_map: (oMap: any) => IBaseItem;
+        transform_file: (file: File, stype: string) => Promise<any>;
+    }
+	//
 }// module infodata
