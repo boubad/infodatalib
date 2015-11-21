@@ -6,19 +6,18 @@ declare module 'infodata' {
     export interface IInfoElement {
 		id: string;
 		has_id: boolean;
+		text: string;
+		toString: () => string;
+		sort_func: (p1: IInfoElement, p2: IInfoElement) => number;
     } // interface IInfoElement
     //
     export interface IElementDesc extends IInfoElement {
 		display?: string;
-		text: string;
 		selected: boolean;
         avatarid?: string;
         url?: string;
         description?: string;
         has_url?: boolean;
-        toString: () => string;
-        //
-		sort_func: (p1: IElementDesc, p2: IElementDesc) => number;
     }// interface IElementDesc
     //
 	export interface IAttachedDoc extends IElementDesc {
@@ -46,6 +45,8 @@ declare module 'infodata' {
         create_id: () => string;
         check_id: () => void;
 		to_map: (oMap: any) => void;
+		get_person_id?: () => string;
+		check_person?: (oPers: IPerson) => boolean;
         //
         attachments?: IAttachedDoc[];
     }// interface IBaseItem
@@ -143,8 +144,6 @@ declare module 'infodata' {
         firstname?: string;
         lastname?: string;
         fullname?: string;
-        //
-        check_person?: (oPers: IPerson) => boolean;
     }
     interface IDepartementPerson extends IPersonItem {
     }

@@ -13,7 +13,10 @@ export class PouchDatabase implements IDocPersist {
 	private _db: IPouchDB;
 	private _url: string;
 	//
-	constructor() { }
+	constructor() {
+		this._db = null;
+		this._url = DATABASE_NAME;
+	 }
 	//
 	public get name(): string {
 		return ((this._url !== undefined) && (this._url !== null)) ? this._url : DATABASE_NAME;

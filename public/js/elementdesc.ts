@@ -68,21 +68,4 @@ export class ElementDesc extends InfoElement implements IElementDesc {
 		let s = this.display;
 		return (s !== null) ? s : '';
 	}
-	public get text(): string {
-		let s = this.toString();
-		return (s !== null) ? s : '';
-	}
-	public sort_func(p1: IElementDesc, p2: IElementDesc): number {
-		let pp1 = (p1 !== undefined) ? p1 : null;
-		let pp2 = (p2 !== undefined) ? p2 : null;
-		if ((pp1 !== null) && (pp2 !== null)) {
-			return pp1.text.localeCompare(pp2.text);
-		} else if ((pp1 !== null) && (pp2 === null)) {
-			return -1;
-		} else if ((pp1 === null) && (pp2 !== null)) {
-			return 1;
-		} else {
-			return 0;
-		}
-	}// sort_func
 }// class ElementDesc

@@ -450,6 +450,9 @@ export class Person extends BaseItem implements IPerson {
         }
         return s;
     }// create_id
+	public get_person_id():string {
+		return this.id;
+	}
     //
     public reset_password(): void {
         if (this.username !== null) {

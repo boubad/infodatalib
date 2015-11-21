@@ -87,6 +87,9 @@ export class PersonItem extends BaseItem implements IPersonItem {
     public avatardocid(): string {
         return this.personid;
     }
+	public get_person_id():string {
+		return this.personid;
+	}
     public get fullname(): string {
         return ((this.lastname !== null) && (this.firstname !== null)) ?
             (this.lastname + ' ' + this.firstname) : '';

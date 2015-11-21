@@ -24,6 +24,28 @@ export class InfoElement implements IInfoElement {
 	public get has_id(): boolean {
 		return (this.id !== null);
 	}
+	public toString(): string {
+		let s = this.id;
+		return (s !== null) ? s : '';
+	}
+	public get text(): string {
+		let s = this.toString();
+		return (s !== null) ? s : '';
+	}
+	public sort_func<T extends IInfoElement>(p1: T, p2: T): number {
+		let pp1 = (p1 !== undefined) ? p1 : null;
+		let pp2 = (p2 !== undefined) ? p2 : null;
+		if ((pp1 !== null) && (pp2 !== null)) {
+			return pp1.text.localeCompare(pp2.text);
+		} else if ((pp1 !== null) && (pp2 === null)) {
+			return -1;
+		} else if ((pp1 === null) && (pp2 !== null)) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}// sort_func
+	//
 	protected check_string(s: string): string {
 		let ss = ((s !== undefined) && (s !== null)) ? s.trim() : null;
 		return ((ss !== null) && (ss.length > 0)) ? ss : null;
@@ -32,7 +54,7 @@ export class InfoElement implements IInfoElement {
 		let ss = ((s !== undefined) && (s !== null)) ? s.trim() : null;
 		return ((ss !== null) && (ss.length > 0)) ? ss.toUpperCase() : null;
 	}
-	protected  format_name(s: string) {
+	protected format_name(s: string) {
         var ss: string = ((s !== undefined) && (s !== null)) ? s.trim() : null;
         if ((ss !== null) && (ss.length > 0)) {
             if (ss.length > 1) {
@@ -41,9 +63,9 @@ export class InfoElement implements IInfoElement {
                 ss = ss.toUpperCase();
             }
         }// ss
-      return ss;
+		return ss;
     }
-	 protected string_to_date(s: any): Date {
+	protected string_to_date(s: any): Date {
         let dRet: Date = null;
         if ((s !== undefined) && (s !== null)) {
             try {
@@ -87,14 +109,14 @@ export class InfoElement implements IInfoElement {
     protected check_date(d: any): Date {
         return this.string_to_date(d);
     } // check_date
-    protected  check_number(s: any): number {
+    protected check_number(s: any): number {
         return this.string_to_number(s);
     }
 	//
     protected format_note(s: number): number {
         return (Math.floor(s * 100.0 + 0.5)) / 100.0;
     }
-	protected  create_username(slast: string, sfirst: string): string {
+	protected create_username(slast: string, sfirst: string): string {
         let sRet: string = null;
         if ((slast !== undefined) && (slast !== null)) {
             let us = slast.trim().toLowerCase();
@@ -117,11 +139,11 @@ export class InfoElement implements IInfoElement {
         }
         return sRet;
     }// create_username
-	protected create_date_key(d:Date) : string {
-		let sRet:string = null;
-		if ((d !== undefined) && (d !== null)){
-			let ss = d.toISOString().substr(0,10);
-			sRet = ss.replace("-","");
+	protected create_date_key(d: Date): string {
+		let sRet: string = null;
+		if ((d !== undefined) && (d !== null)) {
+			let ss = d.toISOString().substr(0, 10);
+			sRet = ss.replace("-", "");
 		}
 		return sRet;
 	}
@@ -165,7 +187,7 @@ export class InfoElement implements IInfoElement {
         }
         return false;
     }// add_id_to_array
-    protected  add_id_to_array(cont: string[], id: string): boolean {
+    protected add_id_to_array(cont: string[], id: string): boolean {
 		if ((cont == undefined) || (cont == null)) {
 			cont = [];
 		}
@@ -184,7 +206,7 @@ export class InfoElement implements IInfoElement {
         }
         return false;
     }// add_id_to_array
-	protected  add_array_to_array(cont: string[], oAr: string[]): void {
+	protected add_array_to_array(cont: string[], oAr: string[]): void {
 		if ((oAr !== undefined) && (oAr !== null)) {
 			let n = oAr.length;
 			for (let i = 0; i < n; ++i) {
@@ -205,7 +227,7 @@ export class InfoElement implements IInfoElement {
         }
         return dRet;
     }
-	 protected  contains_array_id(cont: string[], id: string): boolean {
+	protected contains_array_id(cont: string[], id: string): boolean {
 		if ((cont == undefined) || (cont == null)) {
 			return false;
 		}
@@ -221,4 +243,33 @@ export class InfoElement implements IInfoElement {
         }// p
         return bFound;
     }// add_id_to_array
+	protected convert_error(err: any): string {
+		let sRet: string = null;
+		if ((err !== undefined) && (err !== null)) {
+            if ((err.message !== undefined) && (err.message !== null)) {
+                sRet = (err.message.length > 0) ? err.message : 'Erreur inconnue...';
+            } else if ((err.msg !== undefined) && (err.msg !== null)) {
+                sRet = (err.msg.length > 0) ? err.msg : 'Erreur inconnue...';
+            } else if ((err.reason !== undefined) && (err.reason !== null)) {
+                sRet = err.reason;
+            } else {
+                sRet = JSON.stringify(err);
+            }
+        } else {
+            sRet = 'Erreur inconnue...';
+        }
+		return sRet;
+	}
+	protected sort_array<T extends IInfoElement>(pp: T[]): void {
+		if ((pp !== undefined) && (pp !== null) && (pp.length > 1)) {
+			let p = pp[0];
+			if ((p !== undefined) && (p !== null)) {
+				let pf = p.sort_func;
+				if ((pf !== undefined) && (pf !== null)) {
+					pp.sort(pf);
+				}// pf
+			}//p
+		}// pp
+	}
+	//
 }// class InfoElement

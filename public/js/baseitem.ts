@@ -1,7 +1,7 @@
 // baseitem.ts
 import {ElementDesc} from './elementdesc';
 import {AttachedDoc} from './attacheddoc';
-import {IAttachedDoc, IBaseItem} from 'infodata';
+import {IAttachedDoc, IBaseItem,IPerson} from 'infodata';
 //
 export class BaseItem extends ElementDesc implements IBaseItem {
 	//
@@ -58,6 +58,12 @@ export class BaseItem extends ElementDesc implements IBaseItem {
 	public avatardocid(): string {
 		return this.id;
 	}
+	public get_person_id():string {
+		return null;
+	}
+	public check_person(oPers: IPerson) : boolean {
+		return false;
+	}
 	//
 	public get rev(): string {
 		return (this._rev !== undefined) ? this._rev : null;
@@ -70,6 +76,9 @@ export class BaseItem extends ElementDesc implements IBaseItem {
 	}
 	public get deleted(): boolean {
 		return ((this._deleted !== undefined) && (this._deleted !== null)) ? this._deleted : false;
+	}
+	public set deleted(s:boolean){
+		this._deleted = s;
 	}
 	public get status(): string {
 		return (this._status !== undefined) ? this._status : null;
