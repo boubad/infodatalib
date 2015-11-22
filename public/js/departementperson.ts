@@ -2,7 +2,6 @@
 import {IDepartementPerson} from 'infodata';
 import {PersonItem} from './personitem';
 import {Person} from './person';
-import {ETUDIANT_TYPE, ETUDIANT_PREFIX, ENSEIGNANT_TYPE, ENSEIGNANT_PREFIX, ADMINISTRATOR_TYPE, ADMINISTRATOR_PREFIX} from '../infoconstants';
 //
 export class DepartementPerson extends PersonItem implements IDepartementPerson {
     //
