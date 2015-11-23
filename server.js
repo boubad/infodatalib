@@ -1,5 +1,8 @@
 /* global process */
 /* global __dirname */
+//
+require('events').EventEmitter.prototype._maxListeners = 100;
+//
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -113,7 +116,7 @@ function onListening() {
 /**
  * Create HTTP server.
  */
-
+//process.setMaxListeners(0);
 var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);

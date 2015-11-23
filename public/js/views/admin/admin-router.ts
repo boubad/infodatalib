@@ -18,7 +18,8 @@ export class AdminRouter extends BaseModel {
 	//
 	public configureRouter(config, router: Router) {
 		config.map([
-			{ route: ['', 'home'], moduleId: '../home', nav: true, title: 'Accueil' }
+			{ route: ['', 'home'], moduleId: '../home', nav: true, title: 'Accueil' },
+			{ route: 'departements', moduleId: './departements', nav: true, title: 'Départements' }
 			/*
 			{ route: 'etudaffectations', moduleId: './etudaffectations', nav: true, title: 'Affectations Etudiants' },
 			{ route: 'importetuds', moduleId: './import-etuds', nav: true, title: 'Import Etudiants' },
@@ -31,7 +32,7 @@ export class AdminRouter extends BaseModel {
 			{ route: 'matieres', moduleId: './matieres', nav: true, title: 'Matières' },
 			{ route: 'unites', moduleId: './unites', nav: true, title: 'Unités' },
 			{ route: 'administrators', moduleId: './administrators', nav: true, title: 'Opérateurs' },
-			{ route: 'departements', moduleId: './departements', nav: true, title: 'Départements' }
+			
 			*/
 			/*
 			{ route: 'etud/:id', name: 'etud', moduleId:'../consult/etudiants-sumary', nav: false }

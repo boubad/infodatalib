@@ -111,6 +111,9 @@ export class BaseItem extends ElementDesc implements IBaseItem {
 		if (this.description !== null) {
 			oMap.description = this.description;
 		}
+		if (this.avatarid !== null){
+			oMap.avatarid = this.avatarid;
+		}
 	}// to_map
 	//
 	private read_attached_docs(dd: any[]): IAttachedDoc[] {

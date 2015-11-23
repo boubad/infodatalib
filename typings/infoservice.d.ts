@@ -22,6 +22,7 @@ declare module 'infodata' {
         has_url: boolean;
         is_storeable: boolean;
         clear: () => void;
+		clear_url: ()=> void;
         changed: (evt: any,bUrl?:boolean) => any;
     }// interface IFileDesc
 	export interface IInfoRouter {

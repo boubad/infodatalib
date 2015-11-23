@@ -75,8 +75,8 @@ export class HomeModel extends BaseModel {
 		}
 		this.clear_error();
 		return this.userInfo.login(this.username, this.password).then((bRet) => {
-			this.username = null;
-			this.password = null;
+			this._username = null;
+			this._password = null;
 			let pPers = this.person;
 			if ((pPers !== null) && (pPers.id !== null)) {
 				this.splash_image = this.home_image();
@@ -90,6 +90,8 @@ export class HomeModel extends BaseModel {
 				return false;
 			}
 		}).catch((err) => {
+			this._username = null;
+			this._password = null;
 			this.set_error(err);
 			return false;
 		});
@@ -126,15 +128,22 @@ export class HomeModel extends BaseModel {
 			return false;
 		})
 	}// init_database
+	public deactivate(): any {
+		this._username = null;
+		this._password = null;
+	}
 	public activate(params?: any, config?: any, instruction?: any): any {
 		this.splash_image = this.home_image();
-		this.username = null;
-		this.password = null;
+		this._username = null;
+		this._password = null;
 		if (!this._bInitialized) {
 			return this.init_database().then((b) => {
 				this._bInitialized = true;
 				return true;
-			});
+			}).catch((err)=>{
+				this._bInitialized = false;
+				return false;
+			})
 		} else {
 			return Promise.resolve(true);
 		}

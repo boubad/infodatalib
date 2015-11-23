@@ -47,6 +47,9 @@ export class FileDesc implements IFileDesc {
   public get is_storeable(): boolean {
     return (this.name !== null) && (this.type !== null) && (this.data !== null);
   }
+	public clear_url(): void{
+		this._dataurl = null;
+	}
   public clear(): void {
     this._filename = null;
     this._filetype = null;
